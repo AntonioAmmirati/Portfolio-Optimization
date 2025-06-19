@@ -59,7 +59,9 @@ src/                 # optimiser, risk, plotting
 notebooks/           # step-by-step analysis
 run_pipeline.py      # end-to-end script
 Limitations / Next Steps
-
+> **Note**  
+> The asset universe was *partially selected with the benefit of hindsight* to simulate a best-case geopolitical allocation scenario.  
+> Future versions will include **forward-looking screening** and **data-blind universes** to better replicate live decision-making under uncertainty.
 No FX hedge on CHF/€ legs – overlay TBD
 Turnover ≈ 18 % p.a.; include 10 bp slippage in live trading
 Extend to factor model (FF-5, DEF, COM) for deeper attribution
