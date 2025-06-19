@@ -1,10 +1,8 @@
 Geopolitical Resilience Portfolio
 
-A systematic, multi‑asset portfolio designed to stay resilient—and even profit—during geopolitical crises (Ukraine war, Middle‑East tensions, tariff shocks…). The strategy dynamically blends safe‑havens, defence, energy and “bunker” staples under strict risk constraints and a Ledoit–Wolf shrinkage covariance.
+A systematic, multi‑asset allocation built to profit from geopolitical shocks (Ukraine, Middle East, tariff wars). The strategy mixes safe‑havens, defence, energy and “bunker” staples, optimised via Markowitz with Ledoit‑Wolf shrinkage covariance and strict sector / liquidity caps.
 
-Headline results 2021‑01‑01 → 2025‑06‑13 (daily)
-
-Metric
+Metric (2021‑01‑01 → 2025‑06‑13)
 
 Portfolio
 
@@ -24,7 +22,7 @@ CAGR
 
 13 %
 
-Volatility
+Vol σ
 
 9.6 %
 
@@ -38,103 +36,78 @@ Sharpe
 
 2.23
 
- 0.47
+0.47
 
- 0.57
+0.57
 
- 0.42
+0.42
 
 Max DD
 
 ‑9.1 %
 
-‑26.0 %
+‑26 %
 
-‑24.5 %
+‑24 %
 
-‑35.6 %
+‑36 %
 
-Walk‑forward OOS 2024‑01‑01 → 2025‑06‑13 produced +33 % cumulative, Sharpe 2.63, Sortino 4.9.
+Quick Start
 
-1  Quick Start
+pip install -r requirements.txt   # pandas, numpy, yfinance, sklearn …
+python run_pipeline.py             # downloads data & optimises
 
-# clone & install
-conda create -n geoport python=3.11
-conda activate geoport
-pip install -r requirements.txt
-python notebooks/1_build_portfolio.py   # downloads data & optimises
+Requires a free FRED API key (export FRED_KEY=…).
 
-Requires a free FRED API key (set FRED_KEY env var). 
-
-2  Universe & Data
+Universe & Buckets
 
 Bucket
 
 Tickers
 
-Rationale
+Thesis
 
 Safe‑havens
 
-GLD, FXF, TIP
+GLD, FXF, TIP
 
-Gold, CHF, US TIPS hedge inflation & FX deval.
+Inflation + flight‑to‑quality
 
-Energy (LNG/non‑RU)
+Energy
 
-URA, CVX, LNG, 2222.SR
+URA, CVX, LNG, 2222.SR
 
-Supply security + dividend cushion.
+Supply security, dividend cushion
 
 Defence
 
-LMT, RHM.DE, HO.PA
+LMT, RHM.DE, HO.PA
 
-Rising NATO budgets, hypersonic tech.
+NATO 2 % GDP, hypersonic tech
 
-“Bunker” staples
+Bunker staples
 
-NVO, PG, JNJ, DE
+NVO, PG, JNJ, DE
 
-Resilient cash‑flows in crises.
+Crisis‑resilient cash‑flows
 
-Tech Edge
+Tech edge
 
-MSFT, CRWD
+MSFT, CRWD
 
-Cyber & cloud backbone.
+Cyber & cloud backbone
 
-Protected EM debt
+Optimiser
 
-IGIL.L
+Returns – daily arithmetic
 
-inflation‑linked India bonds.
+Covariance – Ledoit‑Wolf shrinkage × 252
 
-Prices from Yahoo Finance; 10‑year Treasury (DGS10) from FRED.
+Objective – max Sharpe
 
-3  Methodology
+Constraints• Defence ≤ 25 %  • Energy ≤ 15 %  • Safe‑havens ≥ 20 %• CHF ≥ 5 %  • Asset‑cap ≤ 8 %
 
-Return engine   ┈ convert log‑prices → daily arithmetic returns.
-
-Covariance   ┈  Ledoit–Wolf shrinkage on daily returns, annualised × 252.
-
-Expected return   ┈  historical mean × 252.
-
-Optimiser   ┈  SLSQP maximising Sharpe.
-
-Constraints
-
-Defence ≤ 25 %
-
-Energy ≤ 15 %
-
-Safe‑havens ≥ 20 %
-
-CHF liquidity ≥ 5 %
-
-Weight per asset ≤ 8 %
-
-4  Walk‑Forward Validation
+Walk‑Forward Validation
 
 Train
 
@@ -146,9 +119,9 @@ Sharpe
 
 Sortino
 
-2021‑01 → 2022‑01
+2021‑01 → 2022‑01
 
-2022‑01 → 2024‑01
+2022‑01 → 2024‑01
 
 12.8 %
 
@@ -156,9 +129,9 @@ Sortino
 
 0.76
 
-2022‑01 → 2024‑01
+2022‑01 → 2024‑01
 
-2024‑01 → 2025‑06
+2024‑01 → 2025‑06
 
 32.8 %
 
@@ -166,21 +139,23 @@ Sortino
 
 4.92
 
-5  Crisis Case‑Studies
+Crisis Snapshots
 
-Ukraine invasion (Feb–Jun 2022)   +9.6 % vs S&P ‑14 % (DD ‑7 %)
+Ukraine (Feb–Jun ’22)   +9.6 % vs ‑14 % S&P 500
 
-US bank turmoil (Mar–Apr 2023)   +7.1 % (DD ‑1 %)
+US Bank stress (Mar–Apr ’23)   +7.1 %, DD ‑1.2 %
 
-US tariff shock (Apr–Jun 2025)   +7.6 % (DD ‑1 %)
+Tariffs (Apr–Jun ’25)   +7.6 %, DD ‑1.1 %
 
-6  Jensen Alpha 2024‑01 → 2025‑06
+Jensen α (2024‑01 → 2025‑06)
+
+α = const(excess‑return CAPM) – 3‑m T‑Bill daily RF
 
 Benchmark
 
-Alpha (ann.)
+α ann.
 
-Beta
+β
 
 MSCI World
 
@@ -200,40 +175,22 @@ NASDAQ 100
 
 0.19
 
-(alpha = intercept of excess‑return OLS, daily RF = 10y‑T / 252)
+Files
 
-7  File Structure
+data/                # auto‑downloaded prices
+src/                 # optimiser, risk, plotting
+notebooks/           # step‑by‑step analysis
+run_pipeline.py      # end‑to‑end script
 
-├─ notebooks/
-│  ├─ 1_build_portfolio.ipynb   # full pipeline
-│  ├─ 2_wfo_validation.ipynb
-├─ data_cache/                  # auto‑downloaded CSVs
-├─ src/
-│  ├─ optimiser.py              # SLSQP logic
-│  └─ risk.py                   # covariance, turnover, drawdown
-└─ README.md
+Limitations / Next Steps
 
-8  Limitations & Next Steps
+No FX hedge on CHF/€ legs (overlay TBD)
 
-Aramco (2222.SR) limited liquidity outside Tadawul → consider ADR proxy.
+Turnover ≈ 18 % p.a. → include 10 bp slippage in live trading
 
-No FX hedge on non‑USD legs (CHF, EUR tickers); could add overlay.
+Extend to factor model (FF‑5, DEF, COM) for deeper attribution
 
-Turnover ≈ 18 % p.a.; include slippage 10 bp in live trading.
+License & Disclaimer
+Research only — not investment advice. Past performance ≠ future results.
 
-Extend factor model (FF 5 + DEF + COM) for deeper α attribution.
 
-9  References
-
-Ledoit, O.; Wolf, M. "A well‑conditioned estimator for large‑dimensional covariance matrices" (2004).
-
-Ilmanen, A. Expected Returns (Wiley, 2011).
-
-López de Prado, M. Advances in Financial Machine Learning (Wiley, 2018).
-
-10  Disclaimer
-
-Educational & research purposes only.  Nothing here is investment advice or an offer to buy/sell securities.  Past performance is not indicative of future results.
-scipy
-matplotlib
-yfinance
