@@ -1,4 +1,4 @@
-name: Run Portfolio Optimization
+ame: Run Portfolio Optimization
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-script:
+  run-notebook:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Run main.py with FRED_API_KEY
+    - name: Run Portfolio_opc.ipynb with FRED_API_KEY
       env:
         FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-      run: python main.py
+      run: papermill Portfolio_opc.ipynb Portfolio_opc_out.ipynb
