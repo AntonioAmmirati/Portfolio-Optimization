@@ -4,3 +4,8 @@ scipy
 matplotlib
 yfinance
 seaborn
+sklearn
+fredapi
+jupyter
+papermill
+python-dotenv
