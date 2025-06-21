@@ -63,8 +63,8 @@ Limitations / Next Steps
 > The asset universe was *partially selected with the benefit of hindsight* to simulate a best-case geopolitical allocation scenario.  
 > Future versions will include **forward-looking screening** and **data-blind universes** to better replicate live decision-making under uncertainty.
 No FX hedge on CHF/€ legs – overlay TBD
-Turnover ≈ 18 % p.a.; include 10 bp slippage in live trading
-Extend to factor model (FF-5, DEF, COM) for deeper attribution
+Future: Turnover ≈ 18 % p.a.; include 10 bp slippage in live trading and 
+extend to factor model (FF-5, DEF, COM) for deeper attribution
 License & Disclaimer
 
 Research only — not investment advice. Past performance ≠ future results.
