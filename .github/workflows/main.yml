@@ -26,4 +26,4 @@ jobs:
       env:
         FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
       run: |
-        papermill Portfolio_opc.ipynb Portfolio_opc_out.ipyn
+        papermill Portfolio_opc.ipynb Portfolio_opc_out.ipynb
