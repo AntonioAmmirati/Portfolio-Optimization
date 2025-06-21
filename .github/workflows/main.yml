@@ -1,4 +1,4 @@
-ame: Run Portfolio Optimization
+name: Run Portfolio Optimization
 
 on:
   push:
@@ -25,4 +25,5 @@ jobs:
     - name: Run Portfolio_opc.ipynb with FRED_API_KEY
       env:
         FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-      run: papermill Portfolio_opc.ipynb Portfolio_opc_out.ipynb
+      run: |
+        papermill Portfolio_opc.ipynb Portfolio_opc_out.ipyn
