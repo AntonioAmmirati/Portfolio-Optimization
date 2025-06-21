@@ -4,7 +4,7 @@ scipy
 matplotlib
 yfinance
 seaborn
-sklearn
+scikit-learn
 fredapi
 jupyter
 papermill
